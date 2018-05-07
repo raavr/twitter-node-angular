@@ -1,0 +1,10 @@
+@import '../../custom-material/custom-theme';
+
+.tweet-list-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.no-tweets {
+  color: mat-color($warn);
+}

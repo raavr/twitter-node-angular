@@ -8,6 +8,7 @@ import { TweetItemComponent } from './tweet-item/tweet-item.component';
 import { TweetsComponent } from './tweets/tweets.component';
 import { TweetsService } from './tweets.service';
 import { TweetItemPlaceholderComponent } from './tweet-item/tweet-item-placeholder/tweet-item-placeholder.component';
+import { TweetSearchComponent } from './tweet-search/tweet-search.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { TweetItemPlaceholderComponent } from './tweet-item/tweet-item-placehold
     RouterModule.forChild(TweetsRoutes),
     CustomMaterialModule
   ],
-  declarations: [TweetListComponent, TweetItemComponent, TweetsComponent, TweetItemPlaceholderComponent],
+  declarations: [TweetListComponent, TweetItemComponent, TweetsComponent, TweetItemPlaceholderComponent, TweetSearchComponent],
   providers: [
     TweetsService
   ]

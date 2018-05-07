@@ -1,17 +1,15 @@
 @import '~normalize.css/normalize.css';
 @import '~@angular/material/theming';
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
-
-@include mat-core();
-
-$primary: mat-palette($mat-lime, 500);
-$accent:  mat-palette($mat-lime, 500, A200, A400);
-$warn:    mat-palette($mat-red, 500);
-
-$theme: mat-light-theme($primary, $accent, $warn);
+@import './app/custom-material/custom-theme.scss';
 
 @include angular-material-theme($theme);
 
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #fafafa;
+    font-family: 'Roboto', sans-serif;
 }

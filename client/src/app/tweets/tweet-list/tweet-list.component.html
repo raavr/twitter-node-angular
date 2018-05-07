@@ -1,6 +1,7 @@
 <div class="tweet-list-container">
   <div *ngIf="tweets; else placeholder">
     <app-tweet-item *ngFor="let tweet of tweets" [item]="tweet"></app-tweet-item>
+    <div *ngIf="!tweets.length" class="no-tweets">There are no tweets meeting your search criteria.</div>
   </div>
   <ng-template #placeholder>
     <app-tweet-item-placeholder *ngFor="let i of phTweets"></app-tweet-item-placeholder>
