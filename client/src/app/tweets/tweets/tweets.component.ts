@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TweetsService } from '../tweets.service';
+import { TweetItem } from '../tweet-item/tweet-item';
 
 @Component({
   selector: 'app-tweets',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TweetsComponent implements OnInit {
 
-  constructor() { }
+  tweets: TweetItem[];
+  constructor(private tweetsService: TweetsService) { }
 
   ngOnInit() {
+    this.tweetsService.getTweets().subscribe(data => this.tweets = data);
   }
 
 }

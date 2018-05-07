@@ -6,6 +6,7 @@ import { TweetsRoutes } from './tweets.route';
 import { CustomMaterialModule } from '../custom-material';
 import { TweetItemComponent } from './tweet-item/tweet-item.component';
 import { TweetsComponent } from './tweets/tweets.component';
+import { TweetsService } from './tweets.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import { TweetsComponent } from './tweets/tweets.component';
     RouterModule.forChild(TweetsRoutes),
     CustomMaterialModule
   ],
-  declarations: [TweetListComponent, TweetItemComponent, TweetsComponent]
+  declarations: [TweetListComponent, TweetItemComponent, TweetsComponent],
+  providers: [
+    TweetsService
+  ]
 })
 export class TweetsModule { }
