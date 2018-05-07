@@ -1,0 +1,36 @@
+@import '../tweet-item.component';
+
+.tweet-card {
+    &__placeholder {
+        background-color: #e2e2e2;
+
+        &-title-group {
+            width: 100%;
+        }
+
+        &-title, {
+            height: 16px;
+            margin-bottom: 16px;
+
+            &:not(:first-child) {
+                margin-top: -8px;
+            }
+        }
+
+        &-text {
+            height: 80px;
+        }
+    }
+}
+
+.placeholder-wd {
+    width: 100%;
+
+    &--md {
+        width: 60%;
+    }
+
+    &--sm {
+        width: 30%;
+    }
+}

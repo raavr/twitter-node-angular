@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TweetItem } from '../tweet-item/tweet-item';
+import { TWEETS_LIMIT } from '../tweets.constant';
 
 @Component({
   selector: 'app-tweet-list',
@@ -9,7 +10,11 @@ import { TweetItem } from '../tweet-item/tweet-item';
 export class TweetListComponent implements OnInit {
 
   @Input() tweets: TweetItem[];
-  constructor() { }
+  phTweets: Array<number>;
+  
+  constructor() { 
+    this.phTweets = Array.from({length: TWEETS_LIMIT});
+  }
 
   ngOnInit() {
   }
