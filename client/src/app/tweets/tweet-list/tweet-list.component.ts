@@ -1,22 +1,43 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { TweetItem } from '../tweet-item/tweet-item';
 import { TWEETS_LIMIT } from '../tweets.constant';
+import { of } from 'rxjs';
+import { tap } from 'rxjs/internal/operators/tap';
 
 @Component({
   selector: 'app-tweet-list',
   templateUrl: './tweet-list.component.html',
   styleUrls: ['./tweet-list.component.scss']
 })
-export class TweetListComponent implements OnInit {
+export class TweetListComponent {
 
   @Input() tweets: TweetItem[];
-  phTweets: Array<number>;
-  
+  @Input() placeholderTweets: number[];
+  @Input() totalTweets: number;
+  @Output() loadMoreTweets = new EventEmitter<number>();
+
+  scrollCallback;
+
   constructor() { 
-    this.phTweets = Array.from({length: TWEETS_LIMIT});
+    this.scrollCallback = this.load.bind(this);
   }
 
-  ngOnInit() {
+  private shouldLoadMore() {
+    if(!this.tweets) {
+      return false;
+    }
+
+    return this.tweets.length < this.totalTweets;
+  }
+
+  load() {
+    return of(null).pipe(
+      tap(() => {
+        if(this.shouldLoadMore()) {
+          this.loadMoreTweets.emit(this.tweets.length);
+        }
+      }
+    ));
   }
 
 }

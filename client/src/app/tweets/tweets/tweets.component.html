@@ -1,2 +1,2 @@
 <app-tweet-search (onSearchTermsChanged)="search($event)"></app-tweet-search>
-<app-tweet-list [tweets]="tweets"></app-tweet-list>
+<app-tweet-list [tweets]="tweets" [placeholderTweets]="placeholderTweets" [totalTweets]="totalTweets" (loadMoreTweets)="loadMoreTweets($event)"></app-tweet-list>

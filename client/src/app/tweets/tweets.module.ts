@@ -9,6 +9,7 @@ import { TweetsComponent } from './tweets/tweets.component';
 import { TweetsService } from './tweets.service';
 import { TweetItemPlaceholderComponent } from './tweet-item/tweet-item-placeholder/tweet-item-placeholder.component';
 import { TweetSearchComponent } from './tweet-search/tweet-search.component';
+import { InfiniteScrollerDirective } from './tweet-list/infinite-scroller.directive';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { TweetSearchComponent } from './tweet-search/tweet-search.component';
     RouterModule.forChild(TweetsRoutes),
     CustomMaterialModule
   ],
-  declarations: [TweetListComponent, TweetItemComponent, TweetsComponent, TweetItemPlaceholderComponent, TweetSearchComponent],
+  declarations: [TweetListComponent, TweetItemComponent, TweetsComponent, TweetItemPlaceholderComponent, TweetSearchComponent, InfiniteScrollerDirective],
   providers: [
     TweetsService
   ]

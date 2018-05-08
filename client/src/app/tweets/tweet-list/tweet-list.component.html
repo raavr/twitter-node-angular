@@ -1,9 +1,7 @@
-<div class="tweet-list-container">
-  <div *ngIf="tweets; else placeholder">
+<div app-infinite-scroller [scrollCallback]="scrollCallback" class="tweet-list-container">
+  <div *ngIf="tweets">
     <app-tweet-item *ngFor="let tweet of tweets" [item]="tweet"></app-tweet-item>
     <div *ngIf="!tweets.length" class="no-tweets">There are no tweets meeting your search criteria.</div>
   </div>
-  <ng-template #placeholder>
-    <app-tweet-item-placeholder *ngFor="let i of phTweets"></app-tweet-item-placeholder>
-  </ng-template>
+  <app-tweet-item-placeholder *ngFor="let i of placeholderTweets"></app-tweet-item-placeholder>
 </div>

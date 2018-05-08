@@ -8,4 +8,5 @@ interface User {
     name: string;
     screen_name: string;
     profile_image_url: string;
+    statuses_count: number;
 }
