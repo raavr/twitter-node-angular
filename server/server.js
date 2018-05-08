@@ -1,7 +1,9 @@
 const express = require('express');
 const request = require('request-promise-native');
+const cors = require('cors');
 
 const app = express();
+app.use(cors())
 const port = process.env.PORT || 3000;
 const TWITTER_URL = 'https://api.twitter.com';
 
