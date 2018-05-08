@@ -1,4 +1,5 @@
 export interface TweetItem {
+    id: number;
     text: string;
     created_at: string;
     user: User;

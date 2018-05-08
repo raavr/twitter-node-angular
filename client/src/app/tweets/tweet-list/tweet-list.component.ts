@@ -34,7 +34,8 @@ export class TweetListComponent {
     return of(null).pipe(
       tap(() => {
         if(this.shouldLoadMore()) {
-          this.loadMoreTweets.emit(this.tweets.length);
+          const lastId = this.tweets[this.tweets.length-1].id;
+          this.loadMoreTweets.emit(lastId);
         }
       }
     ));

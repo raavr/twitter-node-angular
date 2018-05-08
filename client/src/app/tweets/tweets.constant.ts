@@ -1,1 +1,1 @@
-export const TWEETS_LIMIT = 3;
+export const TWEETS_LIMIT = 10;

@@ -34,7 +34,7 @@ export class TweetsComponent implements OnInit {
   search(value: string) {
     this.tweets = null;
     this.setPlaceholderTweets();
-    this.searchText$.next({ searchText: value, offset: 0});
+    this.searchText$.next({ searchText: value, offset: -1});
   }
 
   loadMoreTweets(offset) {
