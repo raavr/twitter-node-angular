@@ -25,7 +25,7 @@ async function getTwitterAccessToken() {
 
 async function main() {
   if(!process.env.TWITTER_CONSUMER_KEY || !process.env.TWITTER_CONSUMER_SECRET) {
-    console.error('You need to add your twitter app consumer key and secret to env variables!');
+    console.error('You need to add your twitter app consumer key and secret to env variables: TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET');
     process.exit();
   }
 
