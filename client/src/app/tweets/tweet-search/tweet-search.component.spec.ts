@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TweetSearchComponent } from './tweet-search.component';
+import { CustomMaterialModule } from '../../custom-material/custom-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TweetSearchComponent', () => {
   let component: TweetSearchComponent;
@@ -8,7 +9,8 @@ describe('TweetSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TweetSearchComponent ]
+      declarations: [ TweetSearchComponent ],
+      imports: [ BrowserAnimationsModule, CustomMaterialModule ]
     })
     .compileComponents();
   }));

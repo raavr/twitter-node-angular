@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TweetItemPlaceholderComponent } from './tweet-item-placeholder.component';
+import { CustomMaterialModule } from '../../../custom-material/custom-material.module';
 
 describe('TweetItemPlaceholderComponent', () => {
   let component: TweetItemPlaceholderComponent;
@@ -8,7 +9,8 @@ describe('TweetItemPlaceholderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TweetItemPlaceholderComponent ]
+      declarations: [ TweetItemPlaceholderComponent ],
+      imports: [ CustomMaterialModule ]
     })
     .compileComponents();
   }));
