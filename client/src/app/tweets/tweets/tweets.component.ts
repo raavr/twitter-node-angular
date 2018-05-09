@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TweetsService } from '../tweets.service';
 import { TweetItem } from '../tweet-item/tweet-item';
 import { Observable, Subject, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { TWEETS_LIMIT } from '../tweets.constant';
 
 interface SearchObject {
@@ -15,12 +15,13 @@ interface SearchObject {
   templateUrl: './tweets.component.html',
   styleUrls: ['./tweets.component.scss']
 })
-export class TweetsComponent implements OnInit {
+export class TweetsComponent implements OnInit, OnDestroy {
 
   tweets: TweetItem[];
   placeholderTweets: number[];
   
-  searchText$ = new Subject<SearchObject>();
+  private searchText$ = new Subject<SearchObject>();
+  private unsubscribe$ = new Subject();
   
   lastSearchText = '';
   totalTweets = 0;
@@ -66,8 +67,13 @@ export class TweetsComponent implements OnInit {
       .pipe(
         switchMap(
           (search: SearchObject) => this.tweetsService.getTweets(search.searchText, search.offset), (search, tweets) => [search, tweets]
-        )
+        ),
+        takeUntil(this.unsubscribe$)
       ).subscribe(searchObjWithTweets => this.onLoadComplete(searchObjWithTweets));
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }

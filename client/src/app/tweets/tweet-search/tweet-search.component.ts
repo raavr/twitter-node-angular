@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, filter, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, filter, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tweet-search',
   templateUrl: './tweet-search.component.html',
   styleUrls: ['./tweet-search.component.scss']
 })
-export class TweetSearchComponent implements OnInit {
+export class TweetSearchComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchInput') 
   private searchInput: ElementRef;
@@ -16,6 +16,7 @@ export class TweetSearchComponent implements OnInit {
   onSearchTermsChanged = new EventEmitter<string>();
   
   private searchTerms$ = new Subject<string>();
+  private unsubscribe$ = new Subject();
 
   search(name: string) {
     this.searchTerms$.next(name);
@@ -27,7 +28,8 @@ export class TweetSearchComponent implements OnInit {
       .pipe(
         debounceTime(500), 
         distinctUntilChanged(),
-        filter(value => value !== "")
+        filter(value => value !== ""),
+        takeUntil(this.unsubscribe$)
       ).subscribe(
         (value) => this.onSearchTermsChanged.emit(value)
       );
@@ -36,6 +38,11 @@ export class TweetSearchComponent implements OnInit {
   ngAfterViewInit() {
     const firstValue = this.searchInput.nativeElement.value;
     this.search(firstValue);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }
