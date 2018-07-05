@@ -17,7 +17,14 @@ import { InfiniteScrollerDirective } from './tweet-list/infinite-scroller.direct
     RouterModule.forChild(TweetsRoutes),
     CustomMaterialModule
   ],
-  declarations: [TweetListComponent, TweetItemComponent, TweetsComponent, TweetItemPlaceholderComponent, TweetSearchComponent, InfiniteScrollerDirective],
+  declarations: [
+    TweetListComponent, 
+    TweetItemComponent, 
+    TweetsComponent, 
+    TweetItemPlaceholderComponent, 
+    TweetSearchComponent, 
+    InfiniteScrollerDirective
+  ],
   providers: [
     TweetsService
   ]

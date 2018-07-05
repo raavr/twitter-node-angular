@@ -24,42 +24,42 @@ const DEFAULT_THRESHOLD: CallbackThreshold = {
 })
 export class InfiniteScrollerDirective implements OnDestroy {
 
-    @Input() scrollCallback;
-    private unsubscribe$ = new Subject();
+  @Input() scrollCallback;
+  private unsubscribe$ = new Subject();
 
-    constructor(private elm: ElementRef) { }
-  
-    ngAfterViewInit() { 
-      this.streamScrollEvents();
-    }
-    
-    private streamScrollEvents() {
-      fromEvent(window, 'scroll').pipe(
-        map((e): ScrollPosition => ({
-            elemBottom: this.elm.nativeElement.getBoundingClientRect().bottom,
-            scrollTop: window.pageYOffset,
-            windowHeight: window.innerHeight
-          })
-        ),
-        pairwise(),
-        filter(positions => this.isScrollingDown(positions) && this.isScrollExpectedPosition(positions[1])),
-        exhaustMap(() => this.scrollCallback()),
-        takeUntil(this.unsubscribe$)
-      ).subscribe();
-    }
-    
-    private isScrollingDown = (positions: Array<ScrollPosition>) => {
-      return positions[0].scrollTop < positions[1].scrollTop;
-    }
-  
-    private isScrollExpectedPosition = (position: ScrollPosition) => {
-      const diff = position.windowHeight - position.elemBottom;
-      return diff >= DEFAULT_THRESHOLD.min && diff < DEFAULT_THRESHOLD.max;
-    }
+  constructor(private elm: ElementRef) { }
 
-    ngOnDestroy() {
-      this.unsubscribe$.next();
-      this.unsubscribe$.complete();
-    }
-  
+  ngAfterViewInit() {
+    this.streamScrollEvents();
+  }
+
+  private streamScrollEvents() {
+    fromEvent(window, 'scroll').pipe(
+      map((e): ScrollPosition => ({
+        elemBottom: this.elm.nativeElement.getBoundingClientRect().bottom,
+        scrollTop: window.pageYOffset,
+        windowHeight: window.innerHeight
+      })
+      ),
+      pairwise(),
+      filter(positions => this.isScrollingDown(positions) && this.isScrollExpectedPosition(positions[1])),
+      exhaustMap(() => this.scrollCallback()),
+      takeUntil(this.unsubscribe$)
+    ).subscribe();
+  }
+
+  private isScrollingDown = (positions: Array<ScrollPosition>) => {
+    return positions[0].scrollTop < positions[1].scrollTop;
+  }
+
+  private isScrollExpectedPosition = (position: ScrollPosition) => {
+    const diff = position.windowHeight - position.elemBottom;
+    return diff >= DEFAULT_THRESHOLD.min && diff < DEFAULT_THRESHOLD.max;
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
 }
