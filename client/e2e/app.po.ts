@@ -5,7 +5,7 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getInputValue() {
+    return element(by.css('.tweet-search input')).getAttribute('value');
   }
 }

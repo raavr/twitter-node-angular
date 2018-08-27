@@ -7,8 +7,8 @@ describe('twitter-node-angular App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display default input value', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getInputValue()).toEqual('TwitterApi');
   });
 });
