@@ -10,11 +10,12 @@ import { TweetsService } from './tweets.service';
 import { TweetItemPlaceholderComponent } from './tweet-item/tweet-item-placeholder/tweet-item-placeholder.component';
 import { TweetSearchComponent } from './tweet-search/tweet-search.component';
 import { InfiniteScrollerDirective } from './tweet-list/infinite-scroller.directive';
+import { TweetsRoutingModule } from './tweets-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(TweetsRoutes),
+    TweetsRoutingModule,
     CustomMaterialModule
   ],
   declarations: [
@@ -29,4 +30,6 @@ import { InfiniteScrollerDirective } from './tweet-list/infinite-scroller.direct
     TweetsService
   ]
 })
-export class TweetsModule { }
+export class TweetsModule { 
+  
+}
