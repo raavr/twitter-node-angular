@@ -20,7 +20,8 @@ import { CustomMaterialModule } from './custom-material';
     RouterModule.forRoot([]),
     TweetsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
