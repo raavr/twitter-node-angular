@@ -6,10 +6,10 @@
 @include angular-material-theme($theme);
 
 *, *::after, *::before {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #fafafa;
-    font-family: 'Roboto', sans-serif;
+  background-color: #fafafa;
+  font-family: 'Roboto', sans-serif;
 }
