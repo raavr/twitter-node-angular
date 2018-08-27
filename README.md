@@ -1,7 +1,7 @@
 # The Angular Material app with infinite scroll using Twitter API
 
 ## Preview
-![Screenshot 1][1]
+![Demo 1][1]
 
 ## Usage
 
@@ -43,4 +43,4 @@ Open another terminal window:
 
 3. Then go to http://localhost:4200 in your browser.
 
-[1]: ./screenshots/screenshot.gif
+[1]: ./demo/demo.gif
