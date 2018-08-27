@@ -13,16 +13,19 @@ export class TweetsService {
   constructor(private http: HttpClient) { }
 
   getTweets(name: string, lastId = -1, count: number = TWEETS_LIMIT): Observable<TweetItem[]> {
-    let params = new HttpParams().append('count', count.toString()).append('screen_name', name);
+    let params = new HttpParams()
+      .append('count', count.toString())
+      .append('screen_name', name);
+      
     if(lastId !== -1) {
       params = params.append('max_id', lastId.toString());
     }
     
     return this.http.get(`${ENDPOINT}/statuses/user_timeline.json`, { params })
-    .pipe(
-      // delay(1000),
-      catchError(err => of([])),
-      map(response => response as Array<TweetItem>)
-    );
+      .pipe(
+        // delay(1000),
+        catchError(err => of([])),
+        map(response => response as Array<TweetItem>)
+      );
   }
 }

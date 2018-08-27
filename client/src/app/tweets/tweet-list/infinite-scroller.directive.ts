@@ -34,18 +34,20 @@ export class InfiniteScrollerDirective implements OnDestroy {
   }
 
   private streamScrollEvents() {
-    fromEvent(window, 'scroll').pipe(
-      map((e): ScrollPosition => ({
-        elemBottom: this.elm.nativeElement.getBoundingClientRect().bottom,
-        scrollTop: window.pageYOffset,
-        windowHeight: window.innerHeight
-      })
-      ),
-      pairwise(),
-      filter(positions => this.isScrollingDown(positions) && this.isScrollExpectedPosition(positions[1])),
-      exhaustMap(() => this.scrollCallback()),
-      takeUntil(this.unsubscribe$)
-    ).subscribe();
+    fromEvent(window, 'scroll')
+      .pipe(
+        map((_): ScrollPosition => ({
+          elemBottom: this.elm.nativeElement.getBoundingClientRect().bottom,
+          scrollTop: window.pageYOffset,
+          windowHeight: window.innerHeight
+        })),
+        pairwise(),
+        filter(
+          positions => this.isScrollingDown(positions) && this.isScrollExpectedPosition(positions[1])
+        ),
+        exhaustMap(() => this.scrollCallback()),
+        takeUntil(this.unsubscribe$)
+      ).subscribe();
   }
 
   private isScrollingDown = (positions: Array<ScrollPosition>) => {

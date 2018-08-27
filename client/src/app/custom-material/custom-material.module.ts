@@ -4,10 +4,12 @@ import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
-    MatCardModule, MatInputModule
+    MatCardModule, 
+    MatInputModule
   ],
   exports: [
-    MatCardModule, MatInputModule
+    MatCardModule, 
+    MatInputModule
   ]
 })
 export class CustomMaterialModule { }

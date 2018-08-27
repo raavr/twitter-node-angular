@@ -19,23 +19,23 @@ export class TweetsComponent implements OnInit, OnDestroy {
 
   tweets: TweetItem[];
   placeholderTweets: number[];
-  
+
   private searchText$ = new Subject<SearchObject>();
   private unsubscribe$ = new Subject();
-  
+
   lastSearchText = '';
   totalTweets = 0;
 
   constructor(private tweetsService: TweetsService) { }
 
   private setPlaceholderTweets() {
-    this.placeholderTweets = Array.from({length: TWEETS_LIMIT}, (e, i) => i++);
+    this.placeholderTweets = Array.from({ length: TWEETS_LIMIT }, (_, i) => i++);
   }
 
   search(value: string) {
     this.tweets = null;
     this.setPlaceholderTweets();
-    this.searchText$.next({ searchText: value, offset: -1});
+    this.searchText$.next({ searchText: value, offset: -1 });
   }
 
   loadMoreTweets(offset) {
@@ -47,11 +47,11 @@ export class TweetsComponent implements OnInit, OnDestroy {
     return this.lastSearchText === searchText;
   }
 
-  private onLoadComplete(st: (SearchObject | TweetItem[])[]) {
+  private onLoadingCompleted(st: (SearchObject | TweetItem[])[]) {
     const searchText = (st[0] as SearchObject).searchText;
     const newTweets = st[1] as Array<TweetItem>;
-    
-    if(this.isLoadingByScrollEvent(searchText)) {
+
+    if (this.isLoadingByScrollEvent(searchText)) {
       this.tweets = [...this.tweets, ...newTweets];
     } else {
       this.tweets = newTweets;
@@ -66,10 +66,11 @@ export class TweetsComponent implements OnInit, OnDestroy {
     this.searchText$.asObservable()
       .pipe(
         switchMap(
-          (search: SearchObject) => this.tweetsService.getTweets(search.searchText, search.offset), (search, tweets) => [search, tweets]
+          (search: SearchObject) => this.tweetsService.getTweets(search.searchText, search.offset),
+          (search, tweets) => [search, tweets]
         ),
         takeUntil(this.unsubscribe$)
-      ).subscribe(searchObjWithTweets => this.onLoadComplete(searchObjWithTweets));
+      ).subscribe(searchObjWithTweets => this.onLoadingCompleted(searchObjWithTweets));
   }
 
   ngOnDestroy() {
